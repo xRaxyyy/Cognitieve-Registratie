@@ -1,0 +1,1360 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cognitieve Registratie</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #5D5FEF;
+            --primary-light: #E0E1FF;
+            --secondary-color: #10B981;
+            --secondary-light: #D1FAE5;
+            --accent-color: #F59E0B;
+            --accent-light: #FEF3C7;
+            --danger-color: #EF4444;
+            --danger-light: #FEE2E2;
+            --gray-100: #F3F4F6;
+            --gray-200: #E5E7EB;
+            --gray-300: #D1D5DB;
+            --gray-400: #9CA3AF;
+            --gray-500: #6B7280;
+            --gray-600: #4B5563;
+            --gray-700: #374151;
+            --gray-800: #1F2937;
+            --gray-900: #111827;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--gray-100);
+            color: var(--gray-900);
+            line-height: 1.6;
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #4F46E5 100%);
+            color: white;
+            padding: 25px 0;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-radius: 0 0 12px 12px;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            font-size: 2rem;
+            font-weight: 600;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--primary-color);
+            color: white;
+            padding: 10px 20px;
+            gap: 5px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            margin: 5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .btn:hover {
+            background: #4F46E5;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn i {
+            margin-right: 8px;
+        }
+
+        .btn-success {
+            background: var(--secondary-color);
+        }
+
+        .btn-success:hover {
+            background: #059669;
+        }
+
+        .btn-warning {
+            background: var(--accent-color);
+            color: var(--gray-900);
+        }
+
+        .btn-warning:hover {
+            background: #D97706;
+        }
+
+        .btn-danger {
+            background: var(--danger-color);
+        }
+
+        .btn-danger:hover {
+            background: #DC2626;
+        }
+
+        .btn-secondary {
+            background: var(--gray-300);
+            color: var(--gray-800);
+        }
+
+        .btn-secondary:hover {
+            background: var(--gray-400);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary-light);
+        }
+
+        .btn-sm {
+            padding: 6px 12px;
+            font-size: 14px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            padding: 24px;
+            margin-bottom: 24px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--gray-200);
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--gray-700);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid var(--gray-300);
+            border-radius: 8px;
+            font-size: 15px;
+            transition: border-color 0.3s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px var(--primary-light);
+        }
+
+        textarea.form-control {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .question-container {
+            border: 1px solid var(--gray-200);
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            position: relative;
+            background: var(--gray-50);
+        }
+
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .question-title {
+            font-weight: 600;
+            color: var(--primary-color);
+            font-size: 16px;
+        }
+
+        .remove-question {
+            background: var(--danger-light);
+            color: var(--danger-color);
+            border: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .remove-question:hover {
+            background: var(--danger-color);
+            color: white;
+        }
+
+        /* Custom dropdown styles */
+        .custom-dropdown {
+            position: relative;
+            width: 100%;
+        }
+
+        .dropdown-selected {
+            padding: 12px 16px;
+            border: 1px solid var(--gray-300);
+            border-radius: 8px;
+            font-size: 15px;
+            cursor: pointer;
+            background: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s;
+        }
+
+        .dropdown-selected:hover {
+            border-color: var(--gray-400);
+        }
+
+        .dropdown-selected:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px var(--primary-light);
+        }
+
+        .dropdown-options {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 1px solid var(--gray-200);
+            border-radius: 8px;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 100;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            display: none;
+            margin-top: 5px;
+        }
+
+        .dropdown-option {
+            padding: 10px 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .dropdown-option:hover {
+            background-color: var(--primary-light);
+            color: var(--primary-color);
+        }
+
+        .dropdown-option.selected {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .dropdown-icon {
+            transition: transform 0.2s;
+            margin-left: 10px;
+            font-size: 12px;
+            color: var(--gray-500);
+        }
+
+        .dropdown-open .dropdown-icon {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-open .dropdown-options {
+            display: block;
+        }
+
+        /* Hide original select */
+        .original-select {
+            display: none;
+        }
+
+        .filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 24px;
+            background: white;
+            padding: 16px;
+            border-radius: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .filter-group {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .registratie-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+        }
+
+        .registratie-item {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            padding: 20px;
+            position: relative;
+            border-left: 4px solid var(--primary-color);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .registratie-item.completed {
+            border-left-color: var(--secondary-color);
+            background: var(--gray-50);
+        }
+
+        .registratie-item h3 {
+            margin-bottom: 12px;
+            color: var(--primary-color);
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .registratie-item .meta {
+            font-size: 14px;
+            color: var(--gray-500);
+            margin-bottom: 16px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .registratie-item .status {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            background: var(--gray-200);
+            color: var(--gray-700);
+        }
+
+        .registratie-item .status.completed {
+            background: var(--secondary-light);
+            color: var(--secondary-color);
+        }
+
+        .registratie-item .status.active {
+            background: var(--primary-light);
+            color: var(--primary-color);
+        }
+
+        .registratie-item .preview {
+            font-size: 14px;
+            color: var(--gray-600);
+            margin-bottom: 16px;
+            flex-grow: 1;
+        }
+
+        .registratie-item .preview-item {
+            margin-bottom: 6px;
+            display: flex;
+        }
+
+        .registratie-item .preview-label {
+            font-weight: 500;
+            margin-right: 8px;
+            color: var(--gray-700);
+        }
+
+        .registratie-item .actions {
+            margin-top: auto;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            overflow-y: auto;
+            backdrop-filter: blur(4px);
+        }
+
+        .modal-content {
+            background: white;
+            margin: 40px auto;
+            padding: 24px;
+            border-radius: 12px;
+            max-width: 800px;
+            width: 90%;
+            box-shadow: 0 20px 25px rgba(0,0,0,0.1);
+            border: 1px solid var(--gray-200);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--gray-800);
+        }
+
+        .close-modal.cross {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--gray-500);
+            transition: color 0.2s;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .close-modal.cross:hover {
+            color: var(--gray-700);
+            background: var(--gray-100);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .empty-state i {
+            font-size: 48px;
+            color: var(--gray-300);
+            margin-bottom: 16px;
+        }
+
+        .empty-state h3 {
+            color: var(--gray-600);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .empty-state p {
+            color: var(--gray-500);
+            margin-bottom: 20px;
+        }
+
+        .tab-container {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            font-weight: 500;
+            color: var(--gray-500);
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .tab.active {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .tab:hover:not(.active) {
+            color: var(--gray-700);
+        }
+
+        /* Confirm modal styles */
+        .confirm-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .confirm-content {
+            background: white;
+            padding: 24px;
+            border-radius: 12px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .confirm-content h3 {
+            margin-bottom: 16px;
+            color: var(--gray-800);
+        }
+
+        .confirm-content p {
+            margin-bottom: 24px;
+            color: var(--gray-600);
+        }
+
+        .confirm-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        /* Cancel button style fix */
+        .cancel-btn {
+            background: var(--gray-200);
+            color: var(--gray-800);
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .cancel-btn:hover {
+            background: var(--gray-300);
+        }
+
+        @media (max-width: 768px) {
+            .registratie-list {
+                grid-template-columns: 1fr;
+            }
+            
+            .filters {
+                flex-direction: column;
+            }
+
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 16px;
+            }
+
+            .modal-content {
+                margin: 20px auto;
+                padding: 16px;
+            }
+
+            .confirm-buttons {
+                flex-direction: column;
+            }
+        }
+
+        /* Icons (using Unicode as fallback) */
+        .icon {
+            font-style: normal;
+            font-family: 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <h1>Cognitieve Registratie</h1>
+            <button id="newRegBtn" class="btn">
+                <span class="icon">➕</span> Nieuwe Registratie
+            </button>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="filters">
+            <div class="filter-group">
+                <label for="statusFilter">Status</label>
+                <select id="statusFilter" class="original-select">
+                    <option value="all">Alle registraties</option>
+                    <option value="active">Alleen actieve</option>
+                    <option value="completed">Alleen voltooide</option>
+                </select>
+                <div class="custom-dropdown" data-select="statusFilter">
+                    <div class="dropdown-selected">
+                        <span>Alle registraties</span>
+                        <i class="fas fa-chevron-down dropdown-icon"></i>
+                    </div>
+                    <div class="dropdown-options">
+                        <div class="dropdown-option selected" data-value="all">Alle registraties</div>
+                        <div class="dropdown-option" data-value="active">Alleen actieve</div>
+                        <div class="dropdown-option" data-value="completed">Alleen voltooide</div>
+                    </div>
+                </div>
+            </div>
+            <div class="filter-group">
+                <label for="dateFilter">Sorteren op</label>
+                <select id="dateFilter" class="original-select">
+                    <option value="newest">Nieuwste eerst</option>
+                    <option value="oldest">Oudste eerst</option>
+                </select>
+                <div class="custom-dropdown" data-select="dateFilter">
+                    <div class="dropdown-selected">
+                        <span>Nieuwste eerst</span>
+                        <i class="fas fa-chevron-down dropdown-icon"></i>
+                    </div>
+                    <div class="dropdown-options">
+                        <div class="dropdown-option selected" data-value="newest">Nieuwste eerst</div>
+                        <div class="dropdown-option" data-value="oldest">Oudste eerst</div>
+                    </div>
+                </div>
+            </div>
+            <div class="filter-group">
+                <label for="searchFilter">Zoeken</label>
+                <input type="text" id="searchFilter" class="form-control" placeholder="Zoek op gebeurtenis...">
+            </div>
+        </div>
+
+        <div id="registratieList" class="registratie-list">
+            <!-- Registratie items worden hier dynamisch ingeladen -->
+        </div>
+    </div>
+
+    <!-- Modal voor nieuwe/aanpassen registratie -->
+    <div id="registratieModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Nieuwe Cognitieve Registratie</h2>
+                <button class="close-modal cross">&times;</button>
+            </div>
+            <div class="card">
+                <form id="registratieForm">
+                    <input type="hidden" id="registratieId">
+                    <div class="form-group">
+                        <label for="gebeurtenis">Gebeurtenis (wat is er gebeurd?)</label>
+                        <input type="text" id="gebeurtenis" class="form-control" required placeholder="Beschrijf de situatie...">
+                    </div>
+                    <div class="form-group">
+                        <label for="datum">Datum/Tijd</label>
+                        <input type="text" id="datum" class="form-control" disabled>
+                    </div>
+                    
+                    <div class="tab-container">
+                        <div class="tab active" data-tab="initial">Eerste reactie</div>
+                        <div class="tab" data-tab="followup">Vervolg</div>
+                    </div>
+                    
+                    <div id="initialQuestions">
+                        <div class="question-container">
+                            <div class="question-header">
+                                <div class="question-title">Automatische gedachten</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="automatische-gedachten">Wat dacht je meteen? Wat is de ramp?</label>
+                                <textarea id="automatische-gedachten" class="form-control" required placeholder="Beschrijf je automatische gedachten..."></textarea>
+                            </div>
+                        </div>
+                        
+                        <div class="question-container">
+                            <div class="question-header">
+                                <div class="question-title">Gevoel</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="gevoel">Ik voel me...</label>
+                                <textarea id="gevoel" class="form-control" required placeholder="Beschrijf je gevoelens..."></textarea>
+                            </div>
+                        </div>
+                        
+                        <div class="question-container">
+                            <div class="question-header">
+                                <div class="question-title">Uitdagen van gedachten</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="uitdagen-gedachten">Kloppen mijn angsten? Wat is het bewijs?</label>
+                                <textarea id="uitdagen-gedachten" class="form-control" required placeholder="Daag je gedachten uit..."></textarea>
+                            </div>
+                        </div>
+                        
+                        <div class="question-container">
+                            <div class="question-header">
+                                <div class="question-title">Gecorrigeerde gedachten</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="gecorrigeerde-gedachten">Hoe vaak is me dat al overkomen? Wat is een realistischer gedachte?</label>
+                                <textarea id="gecorrigeerde-gedachten" class="form-control" required placeholder="Beschrijf meer realistische gedachten..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="followupQuestions" style="display: none;">
+                        <div class="question-container">
+                            <div class="question-header">
+                                <div class="question-title">Gedrag</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="gedrag">Wat heb je gedaan?</label>
+                                <textarea id="gedrag" class="form-control" placeholder="Beschrijf je gedrag/reactie..."></textarea>
+                            </div>
+                        </div>
+                        
+                        <div class="question-container">
+                            <div class="question-header">
+                                <div class="question-title">Resultaat</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="resultaat">Welke gedachten zijn uitgekomen? Wat heb je geleerd?</label>
+                                <textarea id="resultaat" class="form-control" placeholder="Beschrijf het resultaat..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group" style="margin-top: 20px; display: flex; justify-content: space-between;">
+                        <div>
+                            <button type="button" class="btn btn-secondary close-modal">Annuleren</button>
+                        </div>
+                        <div>
+                            <button type="submit" class="btn">Opslaan</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom confirm modal -->
+    <div id="confirmModal" class="confirm-modal">
+        <div class="confirm-content">
+            <h3>Registratie verwijderen</h3>
+            <p>Weet je zeker dat je deze registratie wilt verwijderen? Deze actie kan niet ongedaan gemaakt worden.</p>
+            <div class="confirm-buttons">
+                <button id="confirmCancel" class="cancel-btn">Annuleren</button>
+                <button id="confirmDelete" class="btn btn-danger">Verwijderen</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // DOM elementen
+            const newRegBtn = document.getElementById('newRegBtn');
+            const registratieModal = document.getElementById('registratieModal');
+            const closeModalBtns = document.querySelectorAll('.close-modal');
+            const registratieForm = document.getElementById('registratieForm');
+            const registratieList = document.getElementById('registratieList');
+            const searchFilter = document.getElementById('searchFilter');
+            const tabs = document.querySelectorAll('.tab');
+            const initialQuestions = document.getElementById('initialQuestions');
+            const followupQuestions = document.getElementById('followupQuestions');
+            const confirmModal = document.getElementById('confirmModal');
+            const confirmDeleteBtn = document.getElementById('confirmDelete');
+            const confirmCancelBtn = document.getElementById('confirmCancel');
+            
+            // State
+            let registraties = [];
+            let currentEditingId = null;
+            let deleteCallback = null;
+            
+            // Initialisatie
+            loadRegistraties();
+            initCustomDropdowns();
+            
+            // Event listeners
+            newRegBtn.addEventListener('click', openNewRegModal);
+            
+            closeModalBtns.forEach(btn => {
+                btn.addEventListener('click', closeModal);
+            });
+            
+            registratieForm.addEventListener('submit', handleFormSubmit);
+            
+            searchFilter.addEventListener('input', () => loadRegistraties());
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    if (this.dataset.tab === 'initial') {
+                        initialQuestions.style.display = 'block';
+                        followupQuestions.style.display = 'none';
+                    } else {
+                        initialQuestions.style.display = 'none';
+                        followupQuestions.style.display = 'block';
+                    }
+                });
+            });
+            
+            // Confirm modal events
+            confirmDeleteBtn.addEventListener('click', function() {
+                if (deleteCallback) {
+                    deleteCallback();
+                }
+                confirmModal.style.display = 'none';
+            });
+            
+            confirmCancelBtn.addEventListener('click', function() {
+                confirmModal.style.display = 'none';
+            });
+            
+            // Functies
+            async function loadRegistraties() {
+                try {
+                    const statusFilter = document.getElementById('statusFilter').value;
+                    const searchTerm = searchFilter.value;
+                    const dateFilter = document.getElementById('dateFilter').value;
+                    
+                    const params = new URLSearchParams();
+                    params.append('status', statusFilter);
+                    params.append('search', searchTerm);
+                    params.append('sort', dateFilter);
+                    
+                    const response = await fetch(`/api/registraties?${params.toString()}`);
+                    
+                    // First check if the response is JSON
+                    const contentType = response.headers.get('content-type');
+                    if (!contentType || !contentType.includes('application/json')) {
+                        const text = await response.text();
+                        throw new Error(`Expected JSON but got: ${text.substring(0, 100)}...`);
+                    }
+                    
+                    if (!response.ok) {
+                        const error = await response.json();
+                        throw new Error(error.message || 'Network response was not ok');
+                    }
+                    
+                    registraties = await response.json();
+                    renderRegistraties();
+                } catch (error) {
+                    console.error('Error loading registrations:', error);
+                    // Show a more user-friendly error message
+                    registratieList.innerHTML = `
+                        <div class="empty-state">
+                            <div class="icon">⚠️</div>
+                            <h3>Fout bij laden</h3>
+                            <p>Kon registraties niet laden. Probeer het later opnieuw.</p>
+                            <p><small>${error.message}</small></p>
+                            <button class="btn" onclick="location.reload()">
+                                <span class="icon">🔄</span> Herladen
+                            </button>
+                        </div>
+                    `;
+                }
+            }
+            
+            async function handleFormSubmit(e) {
+                e.preventDefault();
+                
+                // Verzamel formuliergegevens
+                const gebeurtenis = document.getElementById('gebeurtenis').value;
+                const datum = document.getElementById('datum').value;
+                const id = document.getElementById('registratieId').value || Date.now().toString();
+                const automatischeGedachten = document.getElementById('automatische-gedachten').value;
+                const gevoel = document.getElementById('gevoel').value;
+                const uitdagenGedachten = document.getElementById('uitdagen-gedachten').value;
+                const gecorrigeerdeGedachten = document.getElementById('gecorrigeerde-gedachten').value;
+                const gedrag = document.getElementById('gedrag').value;
+                const resultaat = document.getElementById('resultaat').value;
+                
+                // Validatie
+                if (!gebeurtenis || !automatischeGedachten || !gevoel || !uitdagenGedachten || !gecorrigeerdeGedachten) {
+                    alert('Vul alle verplichte velden in (eerste tab)');
+                    return;
+                }
+                
+                try {
+                    const response = await fetch('/api/registraties', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            id,
+                            gebeurtenis,
+                            datum,
+                            automatische_gedachten: automatischeGedachten,
+                            gevoel,
+                            uitdagen_gedachten: uitdagenGedachten,
+                            gecorrigeerde_gedachten: gecorrigeerdeGedachten,
+                            gedrag: gedrag || null,
+                            resultaat: resultaat || null,
+                            completed: !!resultaat
+                        })
+                    });
+                    
+                    if (!response.ok) throw new Error('Network response was not ok');
+                    
+                    closeModal();
+                    loadRegistraties();
+                } catch (error) {
+                    console.error('Error saving registration:', error);
+                    alert('Er is een fout opgetreden bij het opslaan van de registratie');
+                }
+            }
+            
+            async function deleteRegistratie(id) {
+                try {
+                    const response = await fetch(`/api/registraties/${id}`, {
+                        method: 'DELETE'
+                    });
+                    
+                    if (!response.ok) throw new Error('Network response was not ok');
+                    
+                    loadRegistraties();
+                } catch (error) {
+                    console.error('Error deleting registration:', error);
+                    alert('Er is een fout opgetreden bij het verwijderen van de registratie');
+                }
+            }
+            
+            function openNewRegModal() {
+                currentEditingId = null;
+                document.getElementById('modalTitle').textContent = 'Nieuwe Cognitieve Registratie';
+                document.getElementById('registratieForm').reset();
+                document.getElementById('registratieId').value = '';
+                
+                // Reset tabs
+                tabs.forEach(t => t.classList.remove('active'));
+                document.querySelector('.tab[data-tab="initial"]').classList.add('active');
+                initialQuestions.style.display = 'block';
+                followupQuestions.style.display = 'none';
+                
+                // Stel huidige datum/tijd in
+                const now = new Date();
+                document.getElementById('datum').value = formatDateTime(now);
+                
+                registratieModal.style.display = 'block';
+            }
+            
+            function openEditRegModal(id) {
+                const registratie = registraties.find(r => r.id === id);
+                if (!registratie) return;
+                
+                currentEditingId = id;
+                document.getElementById('modalTitle').textContent = 'Registratie Bewerken';
+                document.getElementById('registratieForm').reset();
+                document.getElementById('registratieId').value = registratie.id;
+                document.getElementById('gebeurtenis').value = registratie.gebeurtenis;
+                document.getElementById('datum').value = registratie.datum;
+                document.getElementById('automatische-gedachten').value = registratie.automatische_gedachten;
+                document.getElementById('gevoel').value = registratie.gevoel;
+                document.getElementById('uitdagen-gedachten').value = registratie.uitdagen_gedachten;
+                document.getElementById('gecorrigeerde-gedachten').value = registratie.gecorrigeerde_gedachten;
+                document.getElementById('gedrag').value = registratie.gedrag || '';
+                document.getElementById('resultaat').value = registratie.resultaat || '';
+                
+                // Toon follow-up tab als er al gedrag/resultaat is ingevuld
+                if (registratie.gedrag || registratie.resultaat) {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    document.querySelector('.tab[data-tab="followup"]').classList.add('active');
+                    initialQuestions.style.display = 'none';
+                    followupQuestions.style.display = 'block';
+                } else {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    document.querySelector('.tab[data-tab="initial"]').classList.add('active');
+                    initialQuestions.style.display = 'block';
+                    followupQuestions.style.display = 'none';
+                }
+                
+                registratieModal.style.display = 'block';
+            }
+            
+            function openFollowupRegModal(id) {
+                const registratie = registraties.find(r => r.id === id);
+                if (!registratie) return;
+                
+                currentEditingId = id;
+                document.getElementById('modalTitle').textContent = 'Vervolg Registratie';
+                document.getElementById('registratieForm').reset();
+                document.getElementById('registratieId').value = registratie.id;
+                document.getElementById('gebeurtenis').value = registratie.gebeurtenis;
+                document.getElementById('datum').value = registratie.datum;
+                document.getElementById('automatische-gedachten').value = registratie.automatische_gedachten;
+                document.getElementById('gevoel').value = registratie.gevoel;
+                document.getElementById('uitdagen-gedachten').value = registratie.uitdagen_gedachten;
+                document.getElementById('gecorrigeerde-gedachten').value = registratie.gecorrigeerde_gedachten;
+                
+                // Toon follow-up tab
+                tabs.forEach(t => t.classList.remove('active'));
+                document.querySelector('.tab[data-tab="followup"]').classList.add('active');
+                initialQuestions.style.display = 'none';
+                followupQuestions.style.display = 'block';
+                
+                registratieModal.style.display = 'block';
+            }
+            
+            function viewRegistratie(id) {
+                const registratie = registraties.find(r => r.id === id);
+                if (!registratie) return;
+
+                const modalContent = `
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2>${registratie.gebeurtenis}</h2>
+                            <button class="close-modal cross">&times;</button>
+                        </div>
+                        <div class="card">
+                            <div class="meta" style="margin-bottom: 20px;">
+                                <div><strong>Datum:</strong> ${registratie.datum}</div>
+                                <div><strong>Status:</strong> <span class="status ${registratie.completed ? 'completed' : 'active'}">
+                                    ${registratie.completed ? 'Voltooid' : 'Actief'}
+                                </span></div>
+                            </div>
+                            <h3 style="margin-bottom: 15px; color: var(--primary-color);">Eerste reactie</h3>
+                            <div class="question-container">
+                                <div class="question-header">
+                                    <div class="question-title">Automatische gedachten</div>
+                                </div>
+                                <p>${registratie.automatische_gedachten}</p>
+                            </div>
+                            <div class="question-container">
+                                <div class="question-header">
+                                    <div class="question-title">Gevoel</div>
+                                </div>
+                                <p>${registratie.gevoel}</p>
+                            </div>
+                            <div class="question-container">
+                                <div class="question-header">
+                                    <div class="question-title">Uitdagen van gedachten</div>
+                                </div>
+                                <p>${registratie.uitdagen_gedachten}</p>
+                            </div>
+                            <div class="question-container">
+                                <div class="question-header">
+                                    <div class="question-title">Gecorrigeerde gedachten</div>
+                                </div>
+                                <p>${registratie.gecorrigeerde_gedachten}</p>
+                            </div>
+                            ${registratie.gedrag || registratie.resultaat ? `
+                            <h3 style="margin-bottom: 15px; color: var(--primary-color); margin-top: 20px;">Vervolg</h3>
+                            ${registratie.gedrag ? `
+                            <div class="question-container">
+                                <div class="question-header">
+                                    <div class="question-title">Gedrag</div>
+                                </div>
+                                <p>${registratie.gedrag}</p>
+                            </div>
+                            ` : ''}
+                            ${registratie.resultaat ? `
+                            <div class="question-container">
+                                <div class="question-header">
+                                    <div class="question-title">Resultaat</div>
+                                </div>
+                                <p>${registratie.resultaat}</p>
+                            </div>
+                            ` : ''}
+                            ` : ''}
+                            <div style="margin-top: 20px; display: flex; justify-content: flex-end;">
+                                <button class="btn close-modal">Sluiten</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                const modal = createModal(modalContent);
+                document.body.appendChild(modal);
+            }
+
+            function createModal(content) {
+                const modal = document.createElement('div');
+                modal.className = 'modal';
+                modal.style.display = 'block';
+                modal.innerHTML = content;
+                
+                modal.querySelectorAll('.close-modal').forEach(button => {
+                    button.addEventListener('click', function() {
+                        modal.remove();
+                    });
+                });
+                
+                return modal;
+            }
+            
+            function renderRegistraties() {
+                registratieList.innerHTML = '';
+                
+                if (registraties.length === 0) {
+                    registratieList.innerHTML = `
+                        <div class="empty-state">
+                            <div class="icon">📭</div>
+                            <h3>Geen registraties gevonden</h3>
+                            <p>${searchFilter.value ? 'Probeer een andere zoekterm' : 'Maak je eerste cognitieve registratie aan'}</p>
+                            <button id="emptyNewRegBtn" class="btn">
+                                <span class="icon">➕</span> Nieuwe Registratie
+                            </button>
+                        </div>
+                    `;
+                    document.getElementById('emptyNewRegBtn').addEventListener('click', openNewRegModal);
+                    return;
+                }
+                
+                registraties.forEach(registratie => {
+                    const regElement = document.createElement('div');
+                    regElement.className = `registratie-item ${registratie.completed ? 'completed' : ''}`;
+                    
+                    const previewContent = `
+                        <div class="preview">
+                            <div class="preview-item">
+                                <div class="preview-label">Gedachten:</div>
+                                <div>${truncateText(registratie.automatische_gedachten, 50)}</div>
+                            </div>
+                            <div class="preview-item">
+                                <div class="preview-label">Gevoel:</div>
+                                <div>${truncateText(registratie.gevoel, 50)}</div>
+                            </div>
+                            ${registratie.resultaat ? `
+                            <div class="preview-item">
+                                <div class="preview-label">Resultaat:</div>
+                                <div>${truncateText(registratie.resultaat, 50)}</div>
+                            </div>
+                            ` : ''}
+                        </div>
+                    `;
+                    
+                    regElement.innerHTML = `
+                        <h3>${registratie.gebeurtenis}</h3>
+                        <div class="meta">
+                            <div>${registratie.datum}</div>
+                            <span class="status ${registratie.completed ? 'completed' : 'active'}">
+                                ${registratie.completed ? 'Voltooid' : 'Actief'}
+                            </span>
+                        </div>
+                        ${previewContent}
+                        <div class="actions">
+                            <button class="btn btn-sm btn-secondary view-btn" data-id="${registratie.id}">
+                                <span class="icon">👁️</span> Bekijken
+                            </button>
+                            ${!registratie.completed ? `
+                                <button class="btn btn-sm btn-warning edit-btn" data-id="${registratie.id}">
+                                    <span class="icon">✏️</span> Bewerken
+                                </button>
+                                ${!registratie.resultaat ? `
+                                    <button class="btn btn-sm btn-outline followup-btn" data-id="${registratie.id}">
+                                        <span class="icon">⏭️</span> Vervolg
+                                    </button>
+                                ` : `
+                                    <button class="btn btn-sm btn-success complete-btn" data-id="${registratie.id}">
+                                        <span class="icon">✔️</span> Voltooien
+                                    </button>
+                                `}
+                            ` : ''}
+                            <button class="btn btn-sm btn-danger delete-btn" data-id="${registratie.id}">
+                                <span class="icon">🗑️</span> Verwijderen
+                            </button>
+                        </div>
+                    `;
+                    registratieList.appendChild(regElement);
+                });
+                
+                // Add event listeners to buttons
+                document.querySelectorAll('.view-btn').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        viewRegistratie(this.getAttribute('data-id'));
+                    });
+                });
+                
+                document.querySelectorAll('.edit-btn').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        openEditRegModal(this.getAttribute('data-id'));
+                    });
+                });
+                
+                document.querySelectorAll('.followup-btn').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        openFollowupRegModal(this.getAttribute('data-id'));
+                    });
+                });
+                
+                document.querySelectorAll('.delete-btn').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        showConfirmModal(() => {
+                            deleteRegistratie(this.getAttribute('data-id'));
+                        });
+                    });
+                });
+            }
+            
+            function showConfirmModal(callback) {
+                deleteCallback = callback;
+                confirmModal.style.display = 'flex';
+            }
+            
+            function closeModal() {
+                registratieModal.style.display = 'none';
+            }
+            
+            function formatDateTime(date) {
+                const day = String(date.getDate()).padStart(2, '0');
+                const month = String(date.getMonth() + 1).padStart(2, '0');
+                const year = date.getFullYear();
+                const hours = String(date.getHours()).padStart(2, '0');
+                const minutes = String(date.getMinutes()).padStart(2, '0');
+                
+                return `${day}-${month}-${year} ${hours}:${minutes}`;
+            }
+            
+            function truncateText(text, maxLength) {
+                if (!text) return '';
+                if (text.length <= maxLength) return text;
+                return text.substring(0, maxLength) + '...';
+            }
+            
+            function initCustomDropdowns() {
+                document.querySelectorAll('.custom-dropdown').forEach(dropdown => {
+                    const selected = dropdown.querySelector('.dropdown-selected');
+                    const options = dropdown.querySelector('.dropdown-options');
+                    const originalSelect = document.getElementById(dropdown.dataset.select);
+                    
+                    // Set initial value
+                    const initialOption = originalSelect.options[originalSelect.selectedIndex];
+                    selected.querySelector('span').textContent = initialOption.textContent;
+                    
+                    // Open/close dropdown
+                    selected.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        
+                        // Close all other dropdowns
+                        document.querySelectorAll('.custom-dropdown').forEach(d => {
+                            if (d !== dropdown) {
+                                d.classList.remove('dropdown-open');
+                                d.querySelector('.dropdown-options').style.display = 'none';
+                            }
+                        });
+                        
+                        // Toggle current dropdown
+                        const isOpen = dropdown.classList.contains('dropdown-open');
+                        if (isOpen) {
+                            dropdown.classList.remove('dropdown-open');
+                            options.style.display = 'none';
+                        } else {
+                            dropdown.classList.add('dropdown-open');
+                            options.style.display = 'block';
+                        }
+                    });
+
+                    // Option selection
+                    options.querySelectorAll('.dropdown-option').forEach(option => {
+                        option.addEventListener('click', function() {
+                            // Update selected option
+                            options.querySelectorAll('.dropdown-option').forEach(opt => {
+                                opt.classList.remove('selected');
+                            });
+                            this.classList.add('selected');
+                            
+                            // Update display
+                            selected.querySelector('span').textContent = this.textContent;
+                            dropdown.classList.remove('dropdown-open');
+                            options.style.display = 'none';
+                            
+                            // Update original select
+                            const value = this.dataset.value;
+                            originalSelect.value = value;
+                            
+                            // Trigger change event
+                            const event = new Event('change');
+                            originalSelect.dispatchEvent(event);
+                            
+                            // Update registratie list
+                            loadRegistraties();
+                        });
+                    });
+                });
+
+                // Close dropdowns when clicking outside
+                document.addEventListener('click', function(e) {
+                    // Only close if clicking outside of any dropdown
+                    if (!e.target.closest('.custom-dropdown')) {
+                        document.querySelectorAll('.dropdown-options').forEach(opt => {
+                            opt.style.display = 'none';
+                        });
+                        document.querySelectorAll('.custom-dropdown').forEach(d => {
+                            d.classList.remove('dropdown-open');
+                        });
+                    }
+                });
+
+                // Handle original select change events
+                document.getElementById('statusFilter').addEventListener('change', loadRegistraties);
+                document.getElementById('dateFilter').addEventListener('change', loadRegistraties);
+            }
+            
+            // Sluit modal wanneer er buiten geklikt wordt
+            window.addEventListener('click', function(e) {
+                if (e.target === registratieModal) {
+                    closeModal();
+                }
+                if (e.target === confirmModal) {
+                    confirmModal.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
